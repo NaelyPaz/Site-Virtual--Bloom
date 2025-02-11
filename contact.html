@@ -5,6 +5,16 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Contato - Virtual Bloom</title>
     <link rel="stylesheet" href="/css/style.css">
+    <style>
+        /* Efeito de transição suave */
+        .fade {
+            transition: opacity 1s ease-in-out;
+        }
+
+        .hidden {
+            opacity: 0;
+        }
+    </style>
 </head>
 <body>
     <!-- Cabeçalho -->
@@ -14,16 +24,16 @@
         </div>
         <nav>
             <ul>
-                <li><a href="/index.html">Home</a></li>
-                <li><a href="/serviços/services.html">Serviços</a></li> <!-- Caminho ajustado -->
-                <li><a href="/about.html">Sobre</a></li>
-                <li><a href="/contact.html">Contato</a></li>
+                <li><a href="/index.html" class="nav-link">Home</a></li>
+                <li><a href="/serviços/services.html" class="nav-link">Serviços</a></li>
+                <li><a href="/about.html" class="nav-link">Sobre</a></li>
+                <li><a href="/contact.html" class="nav-link">Contato</a></li>
             </ul>
         </nav>
     </header>
 
     <!-- Seção Contato -->
-    <section class="contact">
+    <section class="contact fade" id="contact-section">
         <h1>Fale Conosco</h1>
         <form action="mailto:suporte.virtualbloom@gmail.com" method="post" enctype="text/plain">
             <label for="name">Nome:</label>
@@ -45,5 +55,26 @@
     </footer>
 
     <script src="/js/app.js"></script>
+    <script>
+        // Função de transição para mudar de tela com efeito de fade
+        const links = document.querySelectorAll('.nav-link');
+
+        links.forEach(link => {
+            link.addEventListener('click', (e) => {
+                e.preventDefault(); // Impede o comportamento de navegação padrão
+                
+                const targetPage = link.getAttribute('href');
+                const currentSection = document.querySelector('.contact');
+
+                // Adiciona a classe 'hidden' para ocultar a seção atual com transição
+                currentSection.classList.add('hidden');
+                
+                // Espera a transição da página anterior antes de redirecionar
+                setTimeout(() => {
+                    window.location.href = targetPage;
+                }, 1000); // Atraso para esperar o efeito de transição
+            });
+        });
+    </script>
 </body>
 </html>
